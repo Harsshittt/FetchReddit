@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    max-height: 100vh; /* Set a maximum height for the container */
+    overflow-y: auto; /* Add vertical scroll if needed */
+}
+
+.row {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px; /* Adjust as needed for spacing between rows */
+}
+
+.card {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: box-shadow 0.3s ease-in-out;
+    overflow: hidden;
+    width: calc(33% - 20px); /* Adjust as needed for spacing between cards */
+    max-width: 300px; /* Limit the maximum width of each card */
+
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-content {
+    position: relative;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the entire container */
+}
