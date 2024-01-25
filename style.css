@@ -3,10 +3,34 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
+  font-family: "Arial", sans-serif;
 }
 
+.Fetchu {
+  width: 100%;
+  min-height: 600px;
+  background-image: url("https://pbs.twimg.com/media/GEi_k79XwAAKghU?format=jpg&name=large");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: grid;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.Main-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+
 .container {
+  margin-top: 50px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
