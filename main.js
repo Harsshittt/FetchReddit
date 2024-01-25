@@ -64,18 +64,47 @@ async function renderPosts(posts) {
       const cardContent = document.createElement("div");
       cardContent.classList.add("card-content");
 
+      let customClass = "";
+      let swiperStart = `
+        <!-- Slider main container -->
+        <div class="swiper">
+            <!-- Additional required wrapper -->
+          <div class="swiper-wrapper">
+          <!-- Slides -->
+      `;
+      let swiperContent = "";
+      let swiperEnd = `
+            </div>
+            <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
+          <!-- If we need scrollbar -->
+          <div class="swiper-scrollbar"></div>
+        </div>
+      `;
       if (post.data.is_gallery) {
         // Handle Reddit galleries
         if (post.data.media_metadata) {
+          customClass = " gallery-post";
           // Iterate over media_metadata to get direct links
           for (const mediaId in post.data.media_metadata) {
             const galleryImage = post.data.media_metadata[mediaId];
             const directLink = convertToDirectLink(galleryImage.s.u); // Use the s.u field for direct link
-            const image = document.createElement("img");
-            image.src = directLink;
-            image.alt = post.data.title;
-            cardContent.appendChild(image);
+            swiperContent +=
+              `
+                <div class="swiper-slide">
+                <img alt="` +
+              post.data.title +
+              `" src="` +
+              directLink +
+              `">
+              </div>
+            `;
           }
+
+          const divElem = document.createElement("DIV");
+          divElem.innerHTML = swiperStart + swiperContent + swiperEnd;
+          cardContent.appendChild(divElem);
+          cardContent.className += customClass;
         }
       } else if (post.data.url) {
         // Handle posts with a single image or external links
@@ -92,9 +121,9 @@ async function renderPosts(posts) {
 
     container.appendChild(row);
   }
-}
 
-// ...
+  initSwiper();
+}
 
 async function fetchAndRenderNewPosts() {
   try {
@@ -109,12 +138,29 @@ async function fetchAndRenderNewPosts() {
       renderPosts(newPosts);
     }
   } catch (error) {
-    console.error("Error fetching or rendering posts:", error);
+    console.error("Error fetching or rendering posts:", JSON.stringify(error));
   }
 }
 
 window.onload = function () {
   fetchAndRenderNewPosts();
-
-  setInterval(fetchAndRenderNewPosts, 300000); // Fetch new posts every 5 minutes (adjust as needed)
 };
+
+function initSwiper() {
+  if (document.querySelectorAll(".gallery-post").length > 0) {
+    console.log("I'm in....");
+    const swiper = new Swiper(".swiper", {
+      // Optional parameters
+      direction: "horizontal",
+      loop: true,
+
+      // If we need pagination
+      pagination: {
+        el: ".swiper-pagination",
+        dynamicBullets: true,
+      },
+    });
+  } else {
+    console.log("I'm not in :(");
+  }
+}
