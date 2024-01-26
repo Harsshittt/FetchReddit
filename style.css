@@ -89,3 +89,21 @@ body {
 .swiper-pagination-bullet {
   --swiper-pagination-bullet-size: 5px;
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(230, 144, 240, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(230, 144, 240, 0.7);
+}
