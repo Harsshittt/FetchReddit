@@ -3,7 +3,7 @@ const clientSecret = "WV2BgUuyzbqH_efs0gZNI9KCK88SXQ";
 
 async function fetchPosts() {
   const response = await fetch(
-    "https://www.reddit.com/r/unstable_diffusion/hot.json?limit=9",
+    "https://www.reddit.com/r/unstable_diffusion/top.json?t=all&limit=60",
   );
   const data = await response.json();
 
